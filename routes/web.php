@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ValidationLabController;
 use App\Http\Controllers\DemoBladeController;
+use App\Http\Controllers\SecurityTestingController;
 use App\Http\Controllers\XSSLabController;
 
 // ================================================================
@@ -49,16 +50,13 @@ Route::resource('tickets', TicketController::class);
 // ================================================================
 // PLACEHOLDER ROUTES (Coming Soon)
 // ================================================================
-$comingSoon = function () {
-    return redirect()->route('home')->with('error', 'Fitur ini segera datang (Coming Soon)! Sedang dalam pengembangan untuk materi hari berikutnya.');
-};
 
-Route::prefix('security-testing')->name('security-testing.')->group(function () use ($comingSoon) {
-    Route::get('/', $comingSoon)->name('index');
-    Route::get('/xss', $comingSoon)->name('xss');
-    Route::get('/csrf', $comingSoon)->name('csrf');
-    Route::get('/headers', $comingSoon)->name('headers');
-    Route::get('/audit', $comingSoon)->name('audit');
+Route::prefix('security-testing')->name('security-testing.')->group(function () {
+    Route::get('/', [SecurityTestingController::class, 'index'])->name('index');
+    Route::get('/xss', [SecurityTestingController::class, 'xss'])->name('xss');
+    Route::get('/csrf', [SecurityTestingController::class, 'csrf'])->name('csrf');
+    Route::get('/headers', [SecurityTestingController::class, 'headers'])->name('headers');
+    Route::get('/audit', [SecurityTestingController::class, 'audit'])->name('audit');
 });
 
 // =========================================
@@ -77,27 +75,27 @@ Route::prefix('demo-blade')->name('demo-blade.')->group(function () {
 // =========================================
 Route::prefix('xss-lab')->name('xss-lab.')->group(function () {
     Route::get('/', [XSSLabController::class, 'index'])->name('index');
-    
+
     // Reset comments untuk demo ulang
     Route::post('/reset-comments', [XSSLabController::class, 'resetComments'])->name('reset-comments');
-    
+
     // Reflected XSS
     Route::get('/reflected/vulnerable', [XSSLabController::class, 'reflectedVulnerable'])
         ->name('reflected.vulnerable');
     Route::get('/reflected/secure', [XSSLabController::class, 'reflectedSecure'])
         ->name('reflected.secure');
-    
+
     // Stored XSS
     Route::get('/stored/vulnerable', [XSSLabController::class, 'storedVulnerable'])
         ->name('stored.vulnerable');
     Route::post('/stored/vulnerable', [XSSLabController::class, 'storedVulnerableStore'])
         ->name('stored.vulnerable.store');
-    
+
     Route::get('/stored/secure', [XSSLabController::class, 'storedSecure'])
         ->name('stored.secure');
     Route::post('/stored/secure', [XSSLabController::class, 'storedSecureStore'])
         ->name('stored.secure.store');
-    
+
     // DOM-Based XSS
     Route::get('/dom/vulnerable', [XSSLabController::class, 'domVulnerable'])
         ->name('dom.vulnerable');

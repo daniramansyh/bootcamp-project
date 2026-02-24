@@ -42,7 +42,7 @@
     @stack('styles')
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     {{-- ============================================ --}}
     {{-- NAVIGATION --}}
     {{-- ============================================ --}}
@@ -108,8 +108,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li class="dropdown-header">Reflected XSS</li>
-                            <li><a class="dropdown-item text-danger"
-                                    href="{{ route('xss-lab.reflected.vulnerable') }}">
+                            <li><a class="dropdown-item text-danger" href="{{ route('xss-lab.reflected.vulnerable') }}">
                                     <i class="bi bi-unlock"></i> Vulnerable
                                 </a></li>
                             <li><a class="dropdown-item text-success" href="{{ route('xss-lab.reflected.secure') }}">
@@ -169,7 +168,7 @@
                         </ul>
                     </li>
 
-                    {{-- Input Validation  --}}
+                    {{-- Input Validation --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ request()->routeIs('validation-lab.*') ? 'active' : '' }}"
                             href="#" role="button" data-bs-toggle="dropdown">
@@ -217,7 +216,7 @@
     {{-- ============================================ --}}
     {{-- MAIN CONTENT --}}
     {{-- ============================================ --}}
-    <main class="container py-4">
+    <main class="container py-4 flex-grow-1">
         {{-- Flash Messages --}}
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -252,7 +251,7 @@
     {{-- ============================================ --}}
     {{-- FOOTER --}}
     {{-- ============================================ --}}
-    <footer class="footer">
+    <footer class="footer mt-auto">
         <div class="container text-center">
             <p class="mb-1">
                 <i class="bi bi-shield-lock"></i> Secure Ticketing System
