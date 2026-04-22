@@ -1,0 +1,13 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+        - config/
+        - database/
+        - routes/
+
+    # Level 5 is a balanced starting point for existing projects
+    level: 5
