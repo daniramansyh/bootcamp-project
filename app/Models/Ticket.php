@@ -22,7 +22,7 @@ class Ticket extends Model
      * PENTING untuk keamanan!
      * Hanya kolom yang didefinisikan di sini yang bisa diisi via create() atau update()
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'user_id',
@@ -117,7 +117,6 @@ class Ticket extends Model
             'open' => 'bg-warning',
             'in_progress' => 'bg-info',
             'resolved' => 'bg-success',
-            'closed' => 'bg-secondary',
             default => 'bg-secondary',
         };
     }
@@ -132,8 +131,7 @@ class Ticket extends Model
         return match ($this->priority) {
             'high' => 'bg-danger',
             'medium' => 'bg-warning',
-            'low' => 'bg-success',
-            default => 'bg-secondary',
+            default => 'bg-success',
         };
     }
 
